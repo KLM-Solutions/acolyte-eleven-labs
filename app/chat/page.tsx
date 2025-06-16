@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Volume2 } from "lucide-react"
+import { Loader2, Volume2, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 export default function ChatPage() {
   const [text, setText] = useState("")
@@ -54,16 +55,24 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 flex items-center justify-center">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 flex items-center justify-center">
+      <div className="w-full max-w-4xl">
+        <div className="mb-4">
+          <Link href="https://acolyte-sandbox.vercel.app/">
+            <Button variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-100">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Acolyte Sandbox
+            </Button>
+          </Link>
+        </div>
         <Card className="shadow-lg">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold text-gray-800">Eleven Labs</CardTitle>
-            <p className="text-gray-600 mt-2">Convert your text to natural-sounding speech</p>
+            <CardTitle className="text-3xl font-bold text-blue-600">Eleven Labs</CardTitle>
+            <p className="text-blue-600/80 mt-2">Convert your text to natural-sounding speech</p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="text-input" className="text-sm font-medium text-gray-700">
+              <label htmlFor="text-input" className="text-sm font-medium text-blue-600">
                 Enter your text
               </label>
               <Input
@@ -77,7 +86,7 @@ export default function ChatPage() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="voice-model" className="text-sm font-medium text-gray-700">
+              <label htmlFor="voice-model" className="text-sm font-medium text-blue-600">
                 Select Voice Model
               </label>
               <Select value={voiceModel} onValueChange={setVoiceModel} disabled={isGenerating}>
@@ -91,7 +100,7 @@ export default function ChatPage() {
               </Select>
             </div>
 
-            <Button onClick={handleGenerateSpeech} disabled={!text.trim() || isGenerating} className="w-full" size="lg">
+            <Button onClick={handleGenerateSpeech} disabled={!text.trim() || isGenerating} className="w-full bg-blue-600 hover:bg-blue-700" size="lg">
               {isGenerating ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -103,14 +112,14 @@ export default function ChatPage() {
             </Button>
 
             {audioUrl && (
-              <div className="space-y-4 p-4 bg-green-50 rounded-lg border border-green-200">
+              <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-green-800">Speech generated successfully!</span>
+                  <span className="text-sm font-medium text-blue-600">Speech generated successfully!</span>
                   <Button
                     onClick={handlePlayAudio}
                     variant="outline"
                     size="sm"
-                    className="text-green-700 border-green-300 hover:bg-green-100"
+                    className="text-blue-600 border-blue-300 hover:bg-blue-100"
                   >
                     <Volume2 className="mr-2 h-4 w-4" />
                     Play Audio
